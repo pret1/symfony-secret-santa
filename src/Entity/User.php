@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -29,6 +31,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'users')]
+    private Collection $groupsUsers;
+
+    public function __construct()
+    {
+        $this->groupsUsers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -98,5 +108,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Group>
+     */
+    public function getGroupsUsers(): Collection
+    {
+        return $this->groupsUsers;
+    }
+
+    public function addGroupsUser(Group $groupsUser): self
+    {
+        if (!$this->groupsUsers->contains($groupsUser)) {
+            $this->groupsUsers->add($groupsUser);
+            $groupsUser->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroupsUser(Group $groupsUser): self
+    {
+        if ($this->groupsUsers->removeElement($groupsUser)) {
+            $groupsUser->removeUser($this);
+        }
+
+        return $this;
     }
 }

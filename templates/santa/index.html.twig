@@ -9,10 +9,15 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Join to secret Santa</h1>
     {{ app.user.email ?? '' }}
     <a type="button" href="/{{ app.user ? 'logout': 'login'}}">
-        {{ app.user ? 'Logout' : 'Login' }}
+        {{ app.user ? 'Logout' : 'Login/Regist' }}
     </a>
+    {% if app.user %}
+        <div>
+            <a href="#">Join to group 1</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
