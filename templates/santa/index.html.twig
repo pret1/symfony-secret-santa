@@ -33,8 +33,8 @@
                     {#                <th scope="row">{{ group.id }}</th>#}
                     <td>{{ group.name }}</td>
                     <td>
-                        <a type="button" class="btn btn-secondary" href="#">Join</a>
-                        <a type="button" class="btn btn-warning" href="#">Leave</a>
+                        <a type="button" class="btn btn-secondary" href="{{ path('show_group', {'id': group.id}) }}">Show</a>
+{#                        <a type="button" class="btn btn-warning" href="#">Leave</a>#}
                         {#                    <a type="button" class="btn btn-danger" href="{{ path('delete_author', {'id': author.id}) }}">Delete</a>#}
                     </td>
                 </tr>

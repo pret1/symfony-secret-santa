@@ -62,10 +62,15 @@ class Group
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUser(UserInterface $user): self
     {
         $this->users->removeElement($user);
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

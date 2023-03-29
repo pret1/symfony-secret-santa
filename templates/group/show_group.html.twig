@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add user to group{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Users</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">{{ group.id }}</th>
+            <td>{{ group.name }}</td>
+            <td>{{ group.users|join(', ') }}</td>
+            <td>
+                <a type="button" class="btn btn-secondary" href="{{ path('add_user_to_group', {'id': group.id}) }}">Join</a>
+                <a type="button" class="btn btn-warning" href="{{ path('delete_user_from_group', {'id': group.id}) }}">Leave</a>
+                {#                    <a type="button" class="btn btn-danger" href="{{ path('delete_author', {'id': author.id}) }}">Delete</a> #}
+            </td>
+        </tr>
+        </tbody>
+        </table>
+        <a type="button" class="btn btn-dark" href="{{ path('app_santa') }}"><-Back</a>
+    </div>
+{% endblock %}
