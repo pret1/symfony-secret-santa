@@ -4,15 +4,22 @@
 
 {% block body %}
     <h1>Register</h1>
-
+{{ dump() }}
+    {{ form_errors(groupForm) }}
+{#    {{ form(groupForm) }}#}
     {{ form_start(groupForm) }}
+{#    {{ csrf_token('groupadd') }}#}
         {{ form_row(groupForm.name, {
             label: 'Name group'
         }) }}
+{#    {% if groupForm.vars.data.id != null %}#}
         {{ form_row(groupForm.users, {
-            label: 'User'
+            label: 'User',
+
         }) }}
+{#    {% endif %}#}
+{#    {{ form_rest(groupForm) }}#}
 
     <button type="submit" class="btn btn-dark">Add</button>
-    {{ form_end(groupForm) }}
+{#    {{ form_end(groupForm) }}#}
 {% endblock %}

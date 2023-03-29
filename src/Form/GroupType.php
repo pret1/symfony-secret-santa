@@ -6,6 +6,7 @@ use App\Entity\Group;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class GroupType extends AbstractType
 {
@@ -13,7 +14,13 @@ class GroupType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('users')
+            ->add('users', CollectionType::class, [
+                'entry_type' => UserType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'by_reference' => false
+            ] )
         ;
     }
 

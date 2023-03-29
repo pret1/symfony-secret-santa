@@ -6,6 +6,7 @@ use App\Repository\GroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: GroupRepository::class)]
 #[ORM\Table(name: '`group`')]
@@ -52,7 +53,7 @@ class Group
         return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function addUser(UserInterface $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);

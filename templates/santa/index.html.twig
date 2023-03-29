@@ -18,29 +18,30 @@
         <div>
             <a type="button" class="btn btn-primary" href="{{ path('add_group') }}">Create group</a><br>
         </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                {#            <th scope="col">#</th>#}
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for group in groups %}
+                <tr>
+                    {#                <th scope="row">{{ group.id }}</th>#}
+                    <td>{{ group.name }}</td>
+                    <td>
+                        <a type="button" class="btn btn-secondary" href="#">Join</a>
+                        <a type="button" class="btn btn-warning" href="#">Leave</a>
+                        {#                    <a type="button" class="btn btn-danger" href="{{ path('delete_author', {'id': author.id}) }}">Delete</a>#}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     {% endif %}
 
-    <table class="table">
-        <thead>
-        <tr>
-{#            <th scope="col">#</th>#}
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for group in groups %}
-            <tr>
-{#                <th scope="row">{{ group.id }}</th>#}
-                <td>{{ group.name }}</td>
-                <td>
-                    <a type="button" class="btn btn-secondary" href="#">Join</a>
-                    <a type="button" class="btn btn-warning" href="#">Leave</a>
-{#                    <a type="button" class="btn btn-danger" href="{{ path('delete_author', {'id': author.id}) }}">Delete</a>#}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 </div>
 {% endblock %}
