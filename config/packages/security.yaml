@@ -33,7 +33,7 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
-#         - { path: ^/group_santa, roles: ROLE_USER }
+         - { path: ^/add_user_to_group, roles: ROLE_USER }
 
 when@test:
     security:

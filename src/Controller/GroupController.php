@@ -11,6 +11,7 @@ use App\Entity\Group;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class GroupController extends AbstractController
 {
@@ -24,6 +25,7 @@ class GroupController extends AbstractController
     }
 
     #[Route('/add-group', name: 'add_group')]
+    #[IsGranted('ROLE_USER')]
     public function addGroup(Request $request): Response
     {
         $group = new Group();
