@@ -33,8 +33,11 @@
             <td>{{ group.name }}</td>
             <td>{{ group.users|join(', ') }}</td>
             <td>
-                <a type="button" class="btn btn-secondary" href="{{ path('add_user_to_group', {'id': group.id}) }}">Join</a>
-                <a type="button" class="btn btn-warning" href="{{ path('delete_user_from_group', {'id': group.id}) }}">Leave</a>
+                {% if not group.hasUser(app.user) %}
+                    <a type="button" class="btn btn-secondary" href="{{ path('add_user_to_group', {'id': group.id}) }}">Join</a>
+                {% else %}
+                    <a type="button" class="btn btn-warning" href="{{ path('delete_user_from_group', {'id': group.id}) }}">Leave</a>
+                {% endif %}
                 {#                    <a type="button" class="btn btn-danger" href="{{ path('delete_author', {'id': author.id}) }}">Delete</a> #}
             </td>
         </tr>

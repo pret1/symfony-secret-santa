@@ -62,6 +62,11 @@ class Group
         return $this;
     }
 
+    public function hasUser(UserInterface $user): bool
+    {
+        return $this->users->contains($user);
+    }
+
     public function removeUser(UserInterface $user): self
     {
         $this->users->removeElement($user);
