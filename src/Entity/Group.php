@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: GroupRepository::class)]
 #[ORM\Table(name: '`group`')]
@@ -15,12 +16,15 @@ class Group
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('group_read')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('group_read')]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'groupsUsers')]
+    #[Groups('group_read')]
     private Collection $users;
 
     public function __construct()

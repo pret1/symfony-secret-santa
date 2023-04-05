@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\GroupType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Group;
@@ -12,6 +13,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\SerializerInterface;
+
 
 class GroupController extends AbstractController
 {
@@ -81,5 +85,28 @@ class GroupController extends AbstractController
         $this->addFlash('success', 'Success');
 
         return $this->redirectToRoute('app_santa');
+    }
+
+    #[Route(path:'/api/groups', name: 'api_groups', methods: ['GET'], defaults: ['_format' => 'json'])]
+    public function showGroupsApi(SerializerInterface $serializer): JsonResponse
+    {
+        $groups = $this->entityManager->getRepository(Group::class)->findAll();
+//        $json = json_encode($groups, JSON_PRETTY_PRINT, 2);
+        $serializerGroups = $serializer->serialize($groups, 'json', [
+            'groups' => ['group_read'],
+        ]);
+
+//        return new Response(
+//            $serializer->serialize($serializerGroups, JsonEncoder::FORMAT),
+//            200,
+//            ['Content-Type' => 'application/json;charset=UTF-8']
+//        );
+//        $json = ;
+//        $serializerGroups = $serializer->serialize($groups, 'json');
+//        return new JsonResponse($groups);
+//        return new JsonResponse(['test'=>'test']);
+//        return new JsonResponse($serializerGroups, 200, ['Content-Type' => 'application/json']);
+        return new JsonResponse(json_decode($serializerGroups), 200, ['Content-Type' => 'application/json']);
+//        return $this->json($groups);
     }
 }

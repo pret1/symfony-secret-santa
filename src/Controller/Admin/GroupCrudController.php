@@ -4,6 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Group;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class GroupCrudController extends AbstractCrudController
 {
@@ -12,14 +16,14 @@ class GroupCrudController extends AbstractCrudController
         return Group::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('name'),
+            CollectionField::new('users'),
         ];
     }
-    */
+
 }

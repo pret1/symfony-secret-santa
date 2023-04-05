@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -18,21 +19,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('user_read')]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups('user_read')]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups('user_read')]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups('user_read')]
     private ?string $password = null;
 
-    #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'users', fetch: 'EXTRA_LAZY')]
+    #[Groups('user_read')]
     private Collection $groupsUsers;
 
     public function __construct()
