@@ -91,22 +91,10 @@ class GroupController extends AbstractController
     public function showGroupsApi(SerializerInterface $serializer): JsonResponse
     {
         $groups = $this->entityManager->getRepository(Group::class)->findAll();
-//        $json = json_encode($groups, JSON_PRETTY_PRINT, 2);
         $serializerGroups = $serializer->serialize($groups, 'json', [
             'groups' => ['group_read'],
         ]);
 
-//        return new Response(
-//            $serializer->serialize($serializerGroups, JsonEncoder::FORMAT),
-//            200,
-//            ['Content-Type' => 'application/json;charset=UTF-8']
-//        );
-//        $json = ;
-//        $serializerGroups = $serializer->serialize($groups, 'json');
-//        return new JsonResponse($groups);
-//        return new JsonResponse(['test'=>'test']);
-//        return new JsonResponse($serializerGroups, 200, ['Content-Type' => 'application/json']);
         return new JsonResponse(json_decode($serializerGroups), 200, ['Content-Type' => 'application/json']);
-//        return $this->json($groups);
     }
 }
