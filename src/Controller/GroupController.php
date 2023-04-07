@@ -54,11 +54,9 @@ class GroupController extends AbstractController
     }
 
     #[Route('/show-group/{id}', name: 'show_group')]
+    #[IsGranted('ROLE_MANAGE', subject: 'group')]
     public function showGroup($id, Group $group): Response
     {
-        if ($this->getUser() !== $group->getMainAuthor() && !$this->isGranted('ROLE_ADMIN')) {
-           throw $this->createAccessDeniedException('Access Denied.');
-        }
         $group = $this->entityManager->getRepository(Group::class)->find($id);
 
         return $this->render('group/show_group.html.twig', [
