@@ -27,6 +27,10 @@ class Group
     #[Groups('group_read')]
     private Collection $users;
 
+    #[ORM\ManyToOne(inversedBy: 'mainGroups')]
+    #[Groups('group_read')]
+    private ?User $mainAuthor = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -81,5 +85,17 @@ class Group
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getMainAuthor(): ?User
+    {
+        return $this->mainAuthor;
+    }
+
+    public function setMainAuthor(?User $mainAuthor): self
+    {
+        $this->mainAuthor = $mainAuthor;
+
+        return $this;
     }
 }

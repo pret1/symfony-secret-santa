@@ -41,9 +41,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups('user_read')]
     private Collection $groupsUsers;
 
+    #[ORM\OneToMany(mappedBy: 'mainAuthor', targetEntity: Group::class)]
+    #[Groups('user_read')]
+    private Collection $mainGroups;
+
     public function __construct()
     {
         $this->groupsUsers = new ArrayCollection();
+        $this->mainGroups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,5 +151,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->email;
+    }
+
+    /**
+     * @return Collection<int, Group>
+     */
+    public function getMainGroups(): Collection
+    {
+        return $this->mainGroups;
+    }
+
+    public function addMainGroup(Group $mainGroup): self
+    {
+        if (!$this->mainGroups->contains($mainGroup)) {
+            $this->mainGroups->add($mainGroup);
+            $mainGroup->setMainAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMainGroup(Group $mainGroup): self
+    {
+        if ($this->mainGroups->removeElement($mainGroup)) {
+            // set the owning side to null (unless already changed)
+            if ($mainGroup->getMainAuthor() === $this) {
+                $mainGroup->setMainAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }
