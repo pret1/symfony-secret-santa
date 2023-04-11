@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12b84c57c8de7abd5c3701cda64cc4c6",
+    "content-hash": "a2144d0eb8aee923c40a5e6c67434570",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1550,6 +1550,42 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "konau/control-group-via-cli-bundle",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "./bundle/Konau/ControlGroupViaCliBundle",
+                "reference": "2119a7dfee52bab5f76bc69598d3466baabe4819"
+            },
+            "require": {
+                "php": "^8.0.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Konau\\ControlGroupViaCliBundle\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Konau\\ControlGroupViaCliBundle\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Siarhei Konau",
+                    "email": "konovsc@gmail.com"
+                }
+            ],
+            "description": "You can use CRUD action for entity group via CLI",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
