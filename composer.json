@@ -6,7 +6,9 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./bundle/Konau/ControlGroupViaCliBundle"
+            "url": "/var/www/bundles/dev_control_group_bundle",
+            "type": "vcs",
+            "url": "https://github.com/pret1/BatchSize.git"
         }
     ],
     "require": {
