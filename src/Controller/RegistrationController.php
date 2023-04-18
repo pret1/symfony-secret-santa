@@ -39,13 +39,6 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            /**
-             *  this is a temporary action for debug
-             */
-            $eventDispatcher->addListener(UserRegisteredEvent::class, function ($event){
-               dd($event);
-            });
-
             $eventDispatcher->dispatch(new UserRegisteredEvent($user));
             // do anything else you need here, like send an email
 
