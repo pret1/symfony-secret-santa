@@ -17,12 +17,12 @@ class UserRegisteredSubscriber implements EventSubscriberInterface
         $this->logger = $logger;
     }
 
-    public function onUserRegistered(UserRegisteredEvent $event)
+    public function onUserRegistered(UserRegisteredEvent $event): void
     {
         $this->logger->info($event->getUser() . ' that user started custom event');
     }
     
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             UserRegisteredEvent::class => 'onUserRegistered'
