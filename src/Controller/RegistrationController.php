@@ -42,6 +42,8 @@ class RegistrationController extends AbstractController
             $eventDispatcher->dispatch(new UserRegisteredEvent($user));
             // do anything else you need here, like send an email
 
+            $this->addFlash('success', 'Success');
+
             return $this->redirectToRoute('app_santa');
         }
 
